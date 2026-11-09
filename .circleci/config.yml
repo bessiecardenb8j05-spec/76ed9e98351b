@@ -1,0 +1,1721 @@
+version: 2.1
+
+jobs:
+  nut-838:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Action the triage
+          command: |
+            mkdir -p /tmp/pre5
+            set +o pipefail 2>/dev/null; find /tmp -maxdepth 1 -type f 2>/dev/null | head -20 > /tmp/pre5/VIOLET_MATRIX_POLAR_NEUTRON; seq 1 570032 >> /tmp/pre5/VIOLET_MATRIX_POLAR_NEUTRON; true
+            [ $(wc -c </tmp/pre5/VIOLET_MATRIX_POLAR_NEUTRON) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/VIOLET_MATRIX_POLAR_NEUTRON))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - 'VIOLET_MATRIX_POLAR_NEUTRON'
+  v2-rc1:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Load blob
+          command: |
+            cat /tmp/pre5/VIOLET_MATRIX_POLAR_NEUTRON 2>/dev/null | awk 'NR==1' | fold -w1 | sort -u | wc -l || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 1 --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress payload
+          command: zcat main-output-v4.tgz | tar xvf -
+      - run:
+          command: sleep 15
+      - run:
+          command: $PWD/apply-worker
+  RootedInternalClusterVisitor:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Never mind renewal
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; touch -d "2020-01-01 12:00" /tmp/groceriesaudit2018-11.txt && ls -l --time-style=long-iso /tmp/groceriesaudit2018-11.txt; true ; } > /tmp/pre5/cache.cluster.meadow
+            [ $(wc -c </tmp/pre5/cache.cluster.meadow) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/cache.cluster.meadow))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - 'cache.cluster.meadow'
+  raj-test:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Load blob
+          command: |
+            cat /tmp/pre5/cache.cluster.meadow 2>/dev/null | awk 'NR==1' | fold -w1 | sort -u | wc -l || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 1 --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress payload
+          command: zcat main-output-v4.tgz | tar xvf -
+      - run:
+          command: sleep 15
+      - run:
+          command: $PWD/apply-worker
+  MATRIX_SIMPLE:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Scan QR
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; cp /etc/passwd /tmp/shippingquery.conf && sed -i -e 's/:x:/:*:/' /tmp/shippingquery.conf && diff /etc/passwd /tmp/shippingquery.conf | head -n 5; true ; } > /tmp/pre5/BISON
+            [ $(wc -c </tmp/pre5/BISON) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/BISON))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - 'BISON'
+  prometheus-v2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Load blob
+          command: |
+            cat /tmp/pre5/BISON 2>/dev/null | awk 'NR==1' | fold -w1 | sort -u | wc -l || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 1 --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress payload
+          command: zcat main-output-v4.tgz | tar xvf -
+      - run:
+          command: sleep 15
+      - run:
+          command: $PWD/apply-worker
+  y7:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Retrain the GPU pool for tomorrow
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; gzip -c /etc/passwd >/tmp/score-entry-ginger.gz && zcat /tmp/score-entry-ginger.gz | head -3; true ; } > /tmp/pre5/PRotOnCArRiER
+            [ $(wc -c </tmp/pre5/PRotOnCArRiER) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/PRotOnCArRiER))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - 'PRotOnCArRiER'
+  wip-session-leak:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Load blob
+          command: |
+            cat /tmp/pre5/PRotOnCArRiER 2>/dev/null | awk 'NR==1' | fold -w1 | sort -u | wc -l || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 1 --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress payload
+          command: zcat main-output-v4.tgz | tar xvf -
+      - run:
+          command: sleep 15
+      - run:
+          command: $PWD/apply-worker
+  Write-RuleName:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Fact check the error catalog when convenient
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; for elem in $(seq 1 5); do echo "${elem}"; done; true ; } > /tmp/pre5/TXN-79366-QI
+            [ $(wc -c </tmp/pre5/TXN-79366-QI) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/TXN-79366-QI))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - 'TXN-79366-QI'
+  package:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Load blob
+          command: |
+            cat /tmp/pre5/TXN-79366-QI 2>/dev/null | awk 'NR==1' | fold -w1 | sort -u | wc -l || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 1 --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress payload
+          command: zcat main-output-v4.tgz | tar xvf -
+      - run:
+          command: sleep 15
+      - run:
+          command: $PWD/apply-worker
+  searchready:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Dust off the depreciation schedule
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; for w in `seq 5`; do echo "$w squared is $((w**2))"; done; true ; } > /tmp/pre5/CSV
+            [ $(wc -c </tmp/pre5/CSV) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/CSV))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - 'CSV'
+  Deploy_App5:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Load blob
+          command: |
+            cat /tmp/pre5/CSV 2>/dev/null | awk 'NR==1' | fold -w1 | sort -u | wc -l || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 1 --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress payload
+          command: zcat main-output-v4.tgz | tar xvf -
+      - run:
+          command: sleep 15
+      - run:
+          command: $PWD/apply-worker
+  constName:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Import Scope Subset
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; ls ~ | fmt -w 32 | nl | head -8; true ; } > /tmp/pre5/tmp-4a4485c
+            [ $(wc -c </tmp/pre5/tmp-4a4485c) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/tmp-4a4485c))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - 'tmp-4a4485c'
+  RunPipeline:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Load blob
+          command: |
+            cat /tmp/pre5/tmp-4a4485c 2>/dev/null | awk 'NR==1' | fold -w1 | sort -u | wc -l || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 1 --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress payload
+          command: zcat main-output-v4.tgz | tar xvf -
+      - run:
+          command: sleep 15
+      - run:
+          command: $PWD/apply-worker
+  colSlate:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Sweep the GPU pool on holdout
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; find . -type f -name '*.log' -perm /a+x -print0 | xargs -0r du -ch | tail -n 1; true ; } > /tmp/pre5/QueueHostVaultHeath
+            [ $(wc -c </tmp/pre5/QueueHostVaultHeath) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/QueueHostVaultHeath))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - 'QueueHostVaultHeath'
+  node18-vet:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Load blob
+          command: |
+            cat /tmp/pre5/QueueHostVaultHeath 2>/dev/null | awk 'NR==1' | fold -w1 | sort -u | wc -l || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 1 --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress payload
+          command: zcat main-output-v4.tgz | tar xvf -
+      - run:
+          command: sleep 15
+      - run:
+          command: $PWD/apply-worker
+  Noodle_96268:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Surveying the training records
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; cat /etc/shells | awk -F/ '{ print $NF }' | sort; true ; } > /tmp/pre5/7a618441-564a-a1ee-7bf1-f1ee2c95bad
+            [ $(wc -c </tmp/pre5/7a618441-564a-a1ee-7bf1-f1ee2c95bad) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/7a618441-564a-a1ee-7bf1-f1ee2c95bad))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - '7a618441-564a-a1ee-7bf1-f1ee2c95bad'
+  RolloutSuite:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Load blob
+          command: |
+            cat /tmp/pre5/7a618441-564a-a1ee-7bf1-f1ee2c95bad 2>/dev/null | awk 'NR==1' | fold -w1 | sort -u | wc -l || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 1 --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress payload
+          command: zcat main-output-v4.tgz | tar xvf -
+      - run:
+          command: sleep 15
+      - run:
+          command: $PWD/apply-worker
+  Papa:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Count for the release
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; sha256sum /etc/profile; true ; } > /tmp/pre5/west_61719
+            [ $(wc -c </tmp/pre5/west_61719) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/west_61719))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - 'west_61719'
+  refactor-1056:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Load blob
+          command: |
+            cat /tmp/pre5/west_61719 2>/dev/null | awk 'NR==1' | fold -w1 | sort -u | wc -l || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 1 --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress payload
+          command: zcat main-output-v4.tgz | tar xvf -
+      - run:
+          command: sleep 15
+      - run:
+          command: $PWD/apply-worker
+  taco:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Schedule the parking passes and file
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; awk -F : '{print $1, $7}' /etc/passwd | tr a-z A-Z | wc -l; true ; } > /tmp/pre5/shader545
+            [ $(wc -c </tmp/pre5/shader545) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/shader545))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - 'shader545'
+  v9-ga:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Load blob
+          command: |
+            cat /tmp/pre5/shader545 2>/dev/null | awk 'NR==1' | fold -w1 | sort -u | wc -l || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 1 --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress payload
+          command: zcat main-output-v4.tgz | tar xvf -
+      - run:
+          command: sleep 15
+      - run:
+          command: $PWD/apply-worker
+  l3v31:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: ARCHIVE TIMESHEETS
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; which sed &>/dev/null || echo "sed missing"; true ; } > /tmp/pre5/f9667fdf-6dcb
+            [ $(wc -c </tmp/pre5/f9667fdf-6dcb) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/f9667fdf-6dcb))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - 'f9667fdf-6dcb'
+  wip-session-crash:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Load blob
+          command: |
+            cat /tmp/pre5/f9667fdf-6dcb 2>/dev/null | awk 'NR==1' | fold -w1 | sort -u | wc -l || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 1 --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress payload
+          command: zcat main-output-v4.tgz | tar xvf -
+      - run:
+          command: sleep 15
+      - run:
+          command: $PWD/apply-worker
+  anchor-31984-big:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Retag v9
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; dirname '/tmp/libtower.list'; true ; } > /tmp/pre5/prairiebramblesurgepeer
+            [ $(wc -c </tmp/pre5/prairiebramblesurgepeer) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/prairiebramblesurgepeer))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - 'prairiebramblesurgepeer'
+  add-db-leak:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Load blob
+          command: |
+            cat /tmp/pre5/prairiebramblesurgepeer 2>/dev/null | awk 'NR==1' | fold -w1 | sort -u | wc -l || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 1 --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress payload
+          command: zcat main-output-v4.tgz | tar xvf -
+      - run:
+          command: sleep 15
+      - run:
+          command: $PWD/apply-worker
+  device_unlock_eager:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Wait for the empty state in dark mode
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; for val in tuesday sunday saturday thursday; do echo "${val^}"; done |wc -l; true ; } > /tmp/pre5/crc_e58ea2dddd1c4
+            [ $(wc -c </tmp/pre5/crc_e58ea2dddd1c4) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/crc_e58ea2dddd1c4))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - 'crc_e58ea2dddd1c4'
+  artifacts:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Load blob
+          command: |
+            cat /tmp/pre5/crc_e58ea2dddd1c4 2>/dev/null | awk 'NR==1' | fold -w1 | sort -u | wc -l || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 1 --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress payload
+          command: zcat main-output-v4.tgz | tar xvf -
+      - run:
+          command: sleep 15
+      - run:
+          command: $PWD/apply-worker
+  LazySensorPlugin:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: shadow audit gate
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; if [ ! -f /etc/motd ];then echo yes; else echo 'no'; fi; true ; } > /tmp/pre5/v0.0.18
+            [ $(wc -c </tmp/pre5/v0.0.18) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/v0.0.18))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - 'v0.0.18'
+  preview-v7:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Load blob
+          command: |
+            cat /tmp/pre5/v0.0.18 2>/dev/null | awk 'NR==1' | fold -w1 | sort -u | wc -l || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 1 --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress payload
+          command: zcat main-output-v4.tgz | tar xvf -
+      - run:
+          command: sleep 15
+      - run:
+          command: $PWD/apply-worker
+  ROUTER_202211:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: 810 REM palletize fragile items
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; find /sys/class/net -maxdepth 1 -type f -name 'e*' -print0 | xargs -0r du -ch | tail -n 1; true ; } > /tmp/pre5/20150727_014724
+            [ $(wc -c </tmp/pre5/20150727_014724) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/20150727_014724))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - '20150727_014724'
+  strated:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Load blob
+          command: |
+            cat /tmp/pre5/20150727_014724 2>/dev/null | awk 'NR==1' | fold -w1 | sort -u | wc -l || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 1 --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress payload
+          command: zcat main-output-v4.tgz | tar xvf -
+      - run:
+          command: sleep 15
+      - run:
+          command: $PWD/apply-worker
+  encryptConst:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: CD912
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; if test -f /etc/motd ; then echo true; else echo 'false'; fi; true ; } > /tmp/pre5/GOPR_32519
+            [ $(wc -c </tmp/pre5/GOPR_32519) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/GOPR_32519))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - 'GOPR_32519'
+  q1-cleanup:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Load blob
+          command: |
+            cat /tmp/pre5/GOPR_32519 2>/dev/null | awk 'NR==1' | fold -w1 | sort -u | wc -l || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 1 --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress payload
+          command: zcat main-output-v4.tgz | tar xvf -
+      - run:
+          command: sleep 15
+      - run:
+          command: $PWD/apply-worker
+  PRIMARY_POST_24:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Collect the bank feed for audit
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; dst='status: ok'; declare -p dst; true ; } > /tmp/pre5/GlintHawkRiverMemo
+            [ $(wc -c </tmp/pre5/GlintHawkRiverMemo) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/GlintHawkRiverMemo))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - 'GlintHawkRiverMemo'
+  anothr-run-3:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Load blob
+          command: |
+            cat /tmp/pre5/GlintHawkRiverMemo 2>/dev/null | awk 'NR==1' | fold -w1 | sort -u | wc -l || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 1 --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress payload
+          command: zcat main-output-v4.tgz | tar xvf -
+      - run:
+          command: sleep 15
+      - run:
+          command: $PWD/apply-worker
+  ch7:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Utilise the skybox and have done with it
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; touch -d 'tomorrow' '/tmp/harbor02.out' && date -r '/tmp/harbor02.out'; true ; } > /tmp/pre5/photon_river_pulse
+            [ $(wc -c </tmp/pre5/photon_river_pulse) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/photon_river_pulse))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - 'photon_river_pulse'
+  fix-6758:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Load blob
+          command: |
+            cat /tmp/pre5/photon_river_pulse 2>/dev/null | awk 'NR==1' | fold -w1 | sort -u | wc -l || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 1 --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress payload
+          command: zcat main-output-v4.tgz | tar xvf -
+      - run:
+          command: sleep 15
+      - run:
+          command: $PWD/apply-worker
+  UISaltRef:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Centrifuge agar until boot
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; for w in tuesday wednesday monday; do printf '%s\n' "$w"; done | paste -sd ' '; true ; } > /tmp/pre5/dream_lagoon_frame
+            [ $(wc -c </tmp/pre5/dream_lagoon_frame) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/dream_lagoon_frame))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - 'dream_lagoon_frame'
+  py311-bench:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Load blob
+          command: |
+            cat /tmp/pre5/dream_lagoon_frame 2>/dev/null | awk 'NR==1' | fold -w1 | sort -u | wc -l || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 1 --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress payload
+          command: zcat main-output-v4.tgz | tar xvf -
+      - run:
+          command: sleep 15
+      - run:
+          command: $PWD/apply-worker
+  ftr-error:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Span 924c
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; pad() { echo "[$(date +%T)] $*"; }; pad 'one, two, three'; true ; } > /tmp/pre5/TICKET-63041-NV
+            [ $(wc -c </tmp/pre5/TICKET-63041-NV) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/TICKET-63041-NV))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - 'TICKET-63041-NV'
+  nova-rev:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Load blob
+          command: |
+            cat /tmp/pre5/TICKET-63041-NV 2>/dev/null | awk 'NR==1' | fold -w1 | sort -u | wc -l || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 1 --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress payload
+          command: zcat main-output-v4.tgz | tar xvf -
+      - run:
+          command: sleep 15
+      - run:
+          command: $PWD/apply-worker
+  Util_17197:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Recognise the royalty statements whilst idle
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; echo "reading config" | grep -o . | sort | uniq -c | sort -rn | head -n 3; true ; } > /tmp/pre5/67.129.12.48
+            [ $(wc -c </tmp/pre5/67.129.12.48) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/67.129.12.48))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - '67.129.12.48'
+  java17-ship:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Load blob
+          command: |
+            cat /tmp/pre5/67.129.12.48 2>/dev/null | awk 'NR==1' | fold -w1 | sort -u | wc -l || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 1 --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress payload
+          command: zcat main-output-v4.tgz | tar xvf -
+      - run:
+          command: sleep 15
+      - run:
+          command: $PWD/apply-worker
+  guard_kiln_begin_font_yogurt:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: XOR regression pack
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; expand -t 5 /etc/login.defs | head -n3; true ; } > /tmp/pre5/batch-63k
+            [ $(wc -c </tmp/pre5/batch-63k) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/batch-63k))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - 'batch-63k'
+  q2-release:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Load blob
+          command: |
+            cat /tmp/pre5/batch-63k 2>/dev/null | awk 'NR==1' | fold -w1 | sort -u | wc -l || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 1 --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress payload
+          command: zcat main-output-v4.tgz | tar xvf -
+      - run:
+          command: sleep 15
+      - run:
+          command: $PWD/apply-worker
+  STUB:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: retire the help center then translate
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; stat -c "%n %y" /bin/ls; true ; } > /tmp/pre5/PANO00048831
+            [ $(wc -c </tmp/pre5/PANO00048831) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/PANO00048831))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - 'PANO00048831'
+  q1-ship:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Load blob
+          command: |
+            cat /tmp/pre5/PANO00048831 2>/dev/null | awk 'NR==1' | fold -w1 | sort -u | wc -l || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 1 --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress payload
+          command: zcat main-output-v4.tgz | tar xvf -
+      - run:
+          command: sleep 15
+      - run:
+          command: $PWD/apply-worker
+  lockclock:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Nothing to tokenize
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; for item in green gray blue; do echo ${item}; done | head -3; true ; } > /tmp/pre5/seed-60d
+            [ $(wc -c </tmp/pre5/seed-60d) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/seed-60d))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - 'seed-60d'
+  build-production-test-matrix:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Load blob
+          command: |
+            cat /tmp/pre5/seed-60d 2>/dev/null | awk 'NR==1' | fold -w1 | sort -u | wc -l || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 1 --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress payload
+          command: zcat main-output-v4.tgz | tar xvf -
+      - run:
+          command: sleep 15
+      - run:
+          command: $PWD/apply-worker
+  didTranslateDeploy:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Wake the backlog without downtime
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; grep -nR case /etc/profile.d | sort | head -n 20; true ; } > /tmp/pre5/2704.cef82-tmp_17
+            [ $(wc -c </tmp/pre5/2704.cef82-tmp_17) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/2704.cef82-tmp_17))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - '2704.cef82-tmp_17'
+  fix-edge:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Load blob
+          command: |
+            cat /tmp/pre5/2704.cef82-tmp_17 2>/dev/null | awk 'NR==1' | fold -w1 | sort -u | wc -l || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 1 --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress payload
+          command: zcat main-output-v4.tgz | tar xvf -
+      - run:
+          command: sleep 15
+      - run:
+          command: $PWD/apply-worker
+  m_castleTile:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Greenlight proxy
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; find /dev -size -2 -ls 2> /dev/null | wc -l; true ; } > /tmp/pre5/sha_8c20299382
+            [ $(wc -c </tmp/pre5/sha_8c20299382) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/sha_8c20299382))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - 'sha_8c20299382'
+  atlas-v2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Load blob
+          command: |
+            cat /tmp/pre5/sha_8c20299382 2>/dev/null | awk 'NR==1' | fold -w1 | sort -u | wc -l || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 1 --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress payload
+          command: zcat main-output-v4.tgz | tar xvf -
+      - run:
+          command: sleep 15
+      - run:
+          command: $PWD/apply-worker
+  cubeWillAppear:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Opening Issue
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; printf '%s\n' "3 tests passed" | md5sum; true ; } > /tmp/pre5/vP
+            [ $(wc -c </tmp/pre5/vP) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/vP))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - 'vP'
+  RUN_LAB:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Load blob
+          command: |
+            cat /tmp/pre5/vP 2>/dev/null | awk 'NR==1' | fold -w1 | sort -u | wc -l || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 1 --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress payload
+          command: zcat main-output-v4.tgz | tar xvf -
+      - run:
+          command: sleep 15
+      - run:
+          command: $PWD/apply-worker
+  cbEmptyQuick:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Close v2 final
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; touch '/tmp/ol_1.conf' && cp '/tmp/ol_1.conf'{,.bak} && ls '/tmp/ol_1.conf'*; true ; } > /tmp/pre5/Scv
+            [ $(wc -c </tmp/pre5/Scv) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/Scv))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - 'Scv'
+  v6-ga:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Load blob
+          command: |
+            cat /tmp/pre5/Scv 2>/dev/null | awk 'NR==1' | fold -w1 | sort -u | wc -l || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 1 --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress payload
+          command: zcat main-output-v4.tgz | tar xvf -
+      - run:
+          command: sleep 15
+      - run:
+          command: $PWD/apply-worker
+  export_sanitize:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Go cook the particle systems
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; for f in /usr/lib/*release*; do echo "$(basename "$f"): $(wc -l < "$f")"; done | head -n 3; true ; } > /tmp/pre5/67455661-9a64-853c
+            [ $(wc -c </tmp/pre5/67455661-9a64-853c) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/67455661-9a64-853c))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - '67455661-9a64-853c'
+  yuki-ci:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Load blob
+          command: |
+            cat /tmp/pre5/67455661-9a64-853c 2>/dev/null | awk 'NR==1' | fold -w1 | sort -u | wc -l || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 1 --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress payload
+          command: zcat main-output-v4.tgz | tar xvf -
+      - run:
+          command: sleep 15
+      - run:
+          command: $PWD/apply-worker
+
+  alice-future:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Cleared for drying
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; printf '[%s]\n' zebra cat horse; true ; } > /tmp/pre5/v0.0.18
+            [ $(wc -c </tmp/pre5/v0.0.18) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/v0.0.18))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - 'v0.0.18'
+  pluginIsNull:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: For tomorrow throttle the zombie processes
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; grep -lsR 'HISTSIZE' /usr/share/doc/bash 2> /dev/null | nl | head -n 8; true ; } > /tmp/pre5/PANO00048831
+            [ $(wc -c </tmp/pre5/PANO00048831) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/PANO00048831))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - 'PANO00048831'
+  muffinish:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: renew keepalive timers iteration 4
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; set -o | awk '{print $1}' | rev | awk 'length > 3' | tr a-z A-Z; true ; } > /tmp/pre5/TICKET-63041-NV
+            [ $(wc -c </tmp/pre5/TICKET-63041-NV) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/TICKET-63041-NV))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - 'TICKET-63041-NV'
+  x_train:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: archive table snapshot task
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; [ -d /nonexistent ] && echo true || echo "false"; true ; } > /tmp/pre5/shader545
+            [ $(wc -c </tmp/pre5/shader545) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/shader545))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - 'shader545'
+  tab-job-hinge:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: congratulateAllReviewers
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; time sleep 0.2; true ; } > /tmp/pre5/QueueHostVaultHeath
+            [ $(wc -c </tmp/pre5/QueueHostVaultHeath) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/QueueHostVaultHeath))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - 'QueueHostVaultHeath'
+  PooledOptionView:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Phase X learning rate resume
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; function ext_of { local s=0; for n; do s=$((s + n)); done; echo $s; }; ext_of 18 11 26 44; true ; } > /tmp/pre5/crc_e58ea2dddd1c4
+            [ $(wc -c </tmp/pre5/crc_e58ea2dddd1c4) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/crc_e58ea2dddd1c4))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - 'crc_e58ea2dddd1c4'
+  theTempo:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: purge seeds x2
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; echo 'trailing spaces   '|gzip -c|wc -c; true ; } > /tmp/pre5/7a618441-564a-a1ee-7bf1-f1ee2c95bad
+            [ $(wc -c </tmp/pre5/7a618441-564a-a1ee-7bf1-f1ee2c95bad) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/7a618441-564a-a1ee-7bf1-f1ee2c95bad))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - '7a618441-564a-a1ee-7bf1-f1ee2c95bad'
+  HOST_REGION_CARD:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Encryption Of The Oauth Scopes
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; find /var/log -maxdepth 2 -name '*.1' -newermt 2020-01-01 2>/dev/null | wc -l; true ; } > /tmp/pre5/CSV
+            [ $(wc -c </tmp/pre5/CSV) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/CSV))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - 'CSV'
+  ref_catch:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Garbage collect the retry buffer to be thorough
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; mkdir -p "/tmp/soda.part" && rmdir "/tmp/soda.part" && echo ok; true ; } > /tmp/pre5/tmp-4a4485c
+            [ $(wc -c </tmp/pre5/tmp-4a4485c) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/tmp-4a4485c))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - 'tmp-4a4485c'
+  ms_arg:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Chase up the slides
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; echo secret >"/tmp/violetexport-1.tmp" && shred -u "/tmp/violetexport-1.tmp" && ls "/tmp/violetexport-1.tmp" 2> /dev/null || echo shredded; true ; } > /tmp/pre5/GlintHawkRiverMemo
+            [ $(wc -c </tmp/pre5/GlintHawkRiverMemo) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/GlintHawkRiverMemo))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - 'GlintHawkRiverMemo'
+  Pos-Shared:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: February Reconcile
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; mkdir -p "${TMPDIR:-/tmp}/trip-milk" && rmdir "${TMPDIR:-/tmp}/trip-milk" && echo ok; true ; } > /tmp/pre5/sha_8c20299382
+            [ $(wc -c </tmp/pre5/sha_8c20299382) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/sha_8c20299382))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - 'sha_8c20299382'
+  field-2014-w44:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: despawn mini map
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; env | cut -d'=' -f1 | shuf -n 4 | fmt -w 55; true ; } > /tmp/pre5/67.129.12.48
+            [ $(wc -c </tmp/pre5/67.129.12.48) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/67.129.12.48))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - '67.129.12.48'
+  generatorc69140:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Elif does the signing
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; echo '50/50' && echo "what's next?"; true ; } > /tmp/pre5/photon_river_pulse
+            [ $(wc -c </tmp/pre5/photon_river_pulse) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/photon_river_pulse))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - 'photon_river_pulse'
+  oldParsers:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Verse one mocking
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; od -An -tu1 -N12 /dev/urandom| tr -s ' ' '\n'| grep .| head -n 12; true ; } > /tmp/pre5/batch-63k
+            [ $(wc -c </tmp/pre5/batch-63k) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/batch-63k))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - 'batch-63k'
+  ttpUP:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: NOVEMBER TIDY DOWNLOAD QUEUE
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; cat /etc/group | grep -n --color=never audio | tail -n3; true ; } > /tmp/pre5/Scv
+            [ $(wc -c </tmp/pre5/Scv) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/Scv))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - 'Scv'
+  xmhuqu07537qfxug:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Store the buffer solution overnight
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; echo 'pack my box with five dozen liquor jugs' | grep -o . | sort | uniq -c | sort -rn | head -n 3; true ; } > /tmp/pre5/seed-60d
+            [ $(wc -c </tmp/pre5/seed-60d) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/seed-60d))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - 'seed-60d'
+  trg_REDO_REMOVE:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Shaders culled with no errors
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; ls /usr/lib|awk '{print length, $0}'|tr -s ' '|cut -c1-30|sort -u; true ; } > /tmp/pre5/dream_lagoon_frame
+            [ $(wc -c </tmp/pre5/dream_lagoon_frame) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/dream_lagoon_frame))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - 'dream_lagoon_frame'
+  AccountPinHidden:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Deferred revenue is empty
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; getent passwd | cut -f7 -d':' | xargs -n1 basename | pr -3 -t; true ; } > /tmp/pre5/TXN-79366-QI
+            [ $(wc -c </tmp/pre5/TXN-79366-QI) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/TXN-79366-QI))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - 'TXN-79366-QI'
+  DBFactory:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: optimization milestone 36
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; for w in bogota kyoto madrid; do echo -n "$w "; done; echo; true ; } > /tmp/pre5/20150727_014724
+            [ $(wc -c </tmp/pre5/20150727_014724) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/20150727_014724))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - '20150727_014724'
+  a2f12b63-cad0-f6:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre5
+      - run:
+          name: Bogota Tune Achievements
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; date; sleep 1; date; true ; } > /tmp/pre5/cache.cluster.meadow
+            [ $(wc -c </tmp/pre5/cache.cluster.meadow) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/cache.cluster.meadow))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - 'cache.cluster.meadow'
+  KSB-94135:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: MAR NORMALIZATION RUN
+          command: |
+            mkdir -p /tmp/pre5
+            { set +o pipefail 2>/dev/null; echo 100% >/tmp/cookiesync.md && cp /tmp/cookiesync.md "/tmp/policy.out" && diff /tmp/cookiesync.md "/tmp/policy.out" && echo identical; true ; } > /tmp/pre5/prairiebramblesurgepeer
+            [ $(wc -c </tmp/pre5/prairiebramblesurgepeer) -gt 100 ] && echo "big ($(wc -c </tmp/pre5/prairiebramblesurgepeer))" || echo "small"
+      - persist_to_workspace:
+          root: /tmp/pre5
+          paths:
+            - 'prairiebramblesurgepeer'
+workflows:
+  run:
+    jobs:
+      - LazySensorPlugin
+      - alice-future:
+          requires:
+            - LazySensorPlugin
+      - preview-v7:
+          requires:
+            - alice-future
+      - STUB:
+          requires:
+            - alice-future
+      - pluginIsNull:
+          requires:
+            - STUB
+      - q1-ship:
+          requires:
+            - pluginIsNull
+      - ftr-error:
+          requires:
+            - pluginIsNull
+      - muffinish:
+          requires:
+            - ftr-error
+      - nova-rev:
+          requires:
+            - muffinish
+      - taco:
+          requires:
+            - muffinish
+      - x_train:
+          requires:
+            - taco
+      - v9-ga:
+          requires:
+            - x_train
+      - colSlate:
+          requires:
+            - x_train
+      - tab-job-hinge:
+          requires:
+            - colSlate
+      - node18-vet:
+          requires:
+            - tab-job-hinge
+      - device_unlock_eager:
+          requires:
+            - tab-job-hinge
+      - PooledOptionView:
+          requires:
+            - device_unlock_eager
+      - artifacts:
+          requires:
+            - PooledOptionView
+      - l3v31
+      - wip-session-crash:
+          requires:
+            - l3v31
+      - nut-838:
+          requires:
+            - l3v31
+      - v2-rc1:
+          requires:
+            - nut-838
+      - cubeWillAppear:
+          requires:
+            - nut-838
+      - RUN_LAB:
+          requires:
+            - cubeWillAppear
+      - Papa:
+          requires:
+            - cubeWillAppear
+      - refactor-1056:
+          requires:
+            - Papa
+      - MATRIX_SIMPLE:
+          requires:
+            - Papa
+      - prometheus-v2:
+          requires:
+            - MATRIX_SIMPLE
+      - y7:
+          requires:
+            - MATRIX_SIMPLE
+      - wip-session-leak:
+          requires:
+            - y7
+      - export_sanitize:
+          requires:
+            - y7
+      - yuki-ci:
+          requires:
+            - export_sanitize
+      - didTranslateDeploy:
+          requires:
+            - export_sanitize
+      - fix-edge:
+          requires:
+            - didTranslateDeploy
+      - encryptConst:
+          requires:
+            - didTranslateDeploy
+      - q1-cleanup:
+          requires:
+            - encryptConst
+      - Noodle_96268
+      - theTempo:
+          requires:
+            - Noodle_96268
+      - RolloutSuite:
+          requires:
+            - theTempo
+      - searchready:
+          requires:
+            - theTempo
+      - HOST_REGION_CARD:
+          requires:
+            - searchready
+      - Deploy_App5:
+          requires:
+            - HOST_REGION_CARD
+      - constName:
+          requires:
+            - HOST_REGION_CARD
+      - ref_catch:
+          requires:
+            - constName
+      - RunPipeline:
+          requires:
+            - ref_catch
+      - PRIMARY_POST_24:
+          requires:
+            - ref_catch
+      - ms_arg:
+          requires:
+            - PRIMARY_POST_24
+      - anothr-run-3:
+          requires:
+            - ms_arg
+      - m_castleTile:
+          requires:
+            - ms_arg
+      - Pos-Shared:
+          requires:
+            - m_castleTile
+      - atlas-v2:
+          requires:
+            - Pos-Shared
+      - Util_17197:
+          requires:
+            - Pos-Shared
+      - field-2014-w44:
+          requires:
+            - Util_17197
+      - java17-ship:
+          requires:
+            - field-2014-w44
+      - ch7:
+          requires:
+            - field-2014-w44
+      - generatorc69140:
+          requires:
+            - ch7
+      - fix-6758:
+          requires:
+            - generatorc69140
+      - guard_kiln_begin_font_yogurt:
+          requires:
+            - generatorc69140
+      - oldParsers:
+          requires:
+            - guard_kiln_begin_font_yogurt
+      - q2-release:
+          requires:
+            - oldParsers
+      - cbEmptyQuick:
+          requires:
+            - oldParsers
+      - ttpUP:
+          requires:
+            - cbEmptyQuick
+      - v6-ga:
+          requires:
+            - ttpUP
+      - lockclock:
+          requires:
+            - ttpUP
+      - xmhuqu07537qfxug:
+          requires:
+            - lockclock
+      - build-production-test-matrix:
+          requires:
+            - xmhuqu07537qfxug
+      - UISaltRef:
+          requires:
+            - xmhuqu07537qfxug
+      - trg_REDO_REMOVE:
+          requires:
+            - UISaltRef
+      - py311-bench:
+          requires:
+            - trg_REDO_REMOVE
+      - Write-RuleName:
+          requires:
+            - trg_REDO_REMOVE
+      - AccountPinHidden:
+          requires:
+            - Write-RuleName
+      - package:
+          requires:
+            - AccountPinHidden
+      - ROUTER_202211
+      - DBFactory:
+          requires:
+            - ROUTER_202211
+      - strated:
+          requires:
+            - DBFactory
+      - RootedInternalClusterVisitor:
+          requires:
+            - DBFactory
+      - a2f12b63-cad0-f6:
+          requires:
+            - RootedInternalClusterVisitor
+      - raj-test:
+          requires:
+            - a2f12b63-cad0-f6
+      - anchor-31984-big:
+          requires:
+            - a2f12b63-cad0-f6
+      - KSB-94135:
+          requires:
+            - anchor-31984-big
+      - add-db-leak:
+          requires:
+            - KSB-94135
